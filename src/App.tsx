@@ -297,7 +297,7 @@ export function App() {
                 </li>
                 <li>
                   <button onClick={() => setVistaActual('inventario')} className="hover:text-white transition-colors">
-                    Inventario & Kardex
+                    Inventario & Historial
                   </button>
                 </li>
                 <li>

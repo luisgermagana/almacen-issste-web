@@ -84,7 +84,7 @@ export const InventarioView: React.FC<InventarioViewProps> = ({
           <div className="flex items-center space-x-2">
             <Boxes className="w-6 h-6 text-[#691C32]" />
             <h1 className="text-xl font-extrabold text-slate-900 font-['Montserrat']">
-              Control de Inventario & Kardex
+              Control de Inventario & Historial de Movimientos
             </h1>
           </div>
           <p className="text-xs text-slate-500 mt-1">
@@ -184,7 +184,7 @@ export const InventarioView: React.FC<InventarioViewProps> = ({
                   <th className="py-3 px-4 text-center">Enviado</th>
                   <th className="py-3 px-4 text-center">Disponible</th>
                   <th className="py-3 px-4">Estatus</th>
-                  <th className="py-3 px-4 text-right">Kardex</th>
+                  <th className="py-3 px-4 text-right">Historial</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100">
@@ -249,7 +249,7 @@ export const InventarioView: React.FC<InventarioViewProps> = ({
                           }}
                           className="px-2.5 py-1 bg-slate-100 hover:bg-[#691C32] hover:text-white rounded-lg font-semibold text-[11px] transition-colors"
                         >
-                          Kardex
+                          Ver Movimientos
                         </button>
                       </td>
                     </tr>
@@ -268,7 +268,7 @@ export const InventarioView: React.FC<InventarioViewProps> = ({
           </div>
         </div>
 
-        {/* Panel Lateral de Kardex */}
+        {/* Panel Lateral de Historial */}
         {bienSeleccionadoKardex && (
           <div className="lg:col-span-5 bg-white rounded-2xl border border-slate-200 p-5 shadow-sm space-y-4 animate-fadeIn">
             <div className="flex items-start justify-between border-b border-slate-100 pb-3">
@@ -276,7 +276,7 @@ export const InventarioView: React.FC<InventarioViewProps> = ({
                 <History className="w-5 h-5 text-[#691C32]" />
                 <div>
                   <h3 className="text-sm font-extrabold text-slate-900 font-['Montserrat']">
-                    Kardex de Movimientos
+                    Historial de Entradas y Salidas
                   </h3>
                   <p className="text-xs text-slate-500">{bienSeleccionadoKardex.nombre}</p>
                 </div>

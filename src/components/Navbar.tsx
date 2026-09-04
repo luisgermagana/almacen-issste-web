@@ -34,7 +34,7 @@ export const Navbar: React.FC<NavbarProps> = ({
     },
     {
       id: 'inventario',
-      label: 'Inventario & Kardex',
+      label: 'Inventario & Historial',
       icon: <Boxes className="w-3.5 h-3.5" />,
     },
     {
