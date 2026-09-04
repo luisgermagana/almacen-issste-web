@@ -236,8 +236,8 @@ export function App() {
         </div>
       )}
 
-      {/* Contenedor Principal de Vistas */}
-      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      {/* Contenedor Principal de Vistas Expandido */}
+      <main className="flex-1 w-full max-w-[98%] 2xl:max-w-[1850px] mx-auto px-3 sm:px-6 lg:px-8 py-6">
         {cargando && recepciones.length === 0 ? (
           <div className="min-h-[450px] flex flex-col items-center justify-center space-y-4">
             <div className="w-14 h-14 rounded-2xl bg-[#691C32] text-[#DFC79B] flex items-center justify-center shadow-lg animate-pulse">
@@ -301,7 +301,7 @@ export function App() {
 
       {/* Pie de Página Institucional */}
       <footer className="bg-slate-900 text-white border-t-4 border-[#BC955C] mt-16 no-print">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+        <div className="w-full max-w-[98%] 2xl:max-w-[1850px] mx-auto px-3 sm:px-6 lg:px-8 py-10">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div className="md:col-span-2 space-y-3">
               <div className="flex items-center space-x-3">

@@ -223,8 +223,8 @@ export const RacksView: React.FC<RacksViewProps> = ({
           </div>
         </div>
 
-        {/* Estructura del Rack con Vigas Metálicas */}
-        <div className="relative max-w-5xl mx-auto">
+        {/* Estructura del Rack con Vigas Metálicas Expandida */}
+        <div className="relative w-full mx-auto">
           {/* Postes laterales industriales (simulación gráfica) */}
           <div className="absolute -left-2 top-0 bottom-0 w-3 bg-slate-700 rounded-sm shadow-md border-r border-slate-500 z-10" />
           <div className="absolute -right-2 top-0 bottom-0 w-3 bg-slate-700 rounded-sm shadow-md border-l border-slate-500 z-10" />

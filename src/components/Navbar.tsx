@@ -63,28 +63,30 @@ export const Navbar: React.FC<NavbarProps> = ({
   return (
     <header className="sticky top-0 z-40 bg-white/85 backdrop-blur-xl border-b border-slate-200/80 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.03)] no-print">
       {/* Barra superior de gobierno institucional */}
-      <div className="bg-[#691C32] text-white px-4 lg:px-8 py-1.5 flex items-center justify-between text-xs border-b border-[#BC955C]/40">
-        <div className="flex items-center space-x-3">
-          <span className="font-extrabold tracking-wider uppercase text-[11px] text-slate-100">
-            Gobierno de México
-          </span>
-          <span className="text-white/30">|</span>
-          <span className="text-[#DFC79B] font-semibold text-[11px] hidden sm:inline tracking-tight">
-            Instituto de Seguridad y Servicios Sociales de los Trabajadores del Estado
-          </span>
-        </div>
-        <div className="flex items-center space-x-3 text-[11px]">
-          <span className="text-slate-200 hidden md:inline font-medium">
-            Almacén Central y Centro de Distribución Nacional
-          </span>
-          <span className="px-2 py-0.5 rounded-full bg-[#8B1E3F] text-white font-bold text-[10px] tracking-wider uppercase border border-white/15 shadow-sm">
-            México
-          </span>
+      <div className="bg-[#691C32] text-white px-3 lg:px-6 py-1.5 border-b border-[#BC955C]/40">
+        <div className="w-full max-w-[98%] 2xl:max-w-[1850px] mx-auto flex items-center justify-between text-xs">
+          <div className="flex items-center space-x-3">
+            <span className="font-extrabold tracking-wider uppercase text-[11px] text-slate-100">
+              Gobierno de México
+            </span>
+            <span className="text-white/30">|</span>
+            <span className="text-[#DFC79B] font-semibold text-[11px] hidden sm:inline tracking-tight">
+              Instituto de Seguridad y Servicios Sociales de los Trabajadores del Estado
+            </span>
+          </div>
+          <div className="flex items-center space-x-3 text-[11px]">
+            <span className="text-slate-200 hidden md:inline font-medium">
+              Almacén Central y Centro de Distribución Nacional
+            </span>
+            <span className="px-2 py-0.5 rounded-full bg-[#8B1E3F] text-white font-bold text-[10px] tracking-wider uppercase border border-white/15 shadow-sm">
+              México
+            </span>
+          </div>
         </div>
       </div>
 
-      {/* Navegación Principal */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Navegación Principal Expandida */}
+      <div className="w-full max-w-[98%] 2xl:max-w-[1850px] mx-auto px-3 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo y Nombre del Sistema */}
           <div
@@ -105,7 +107,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 </span>
               </div>
               <p className="text-[11px] text-slate-400 font-medium">
-                Torre de Control & Monitoreo Operativo
+                Dpto. de Almacenaje y Distribución de Bienes de Inversión y Varios.
               </p>
             </div>
           </div>
@@ -118,11 +120,10 @@ export const Navbar: React.FC<NavbarProps> = ({
                 <button
                   key={item.id}
                   onClick={() => onCambiarVista(item.id)}
-                  className={`relative flex items-center space-x-2 px-3.5 py-1.5 rounded-full text-xs transition-all duration-200 ${
-                    activo
+                  className={`relative flex items-center space-x-2 px-3.5 py-1.5 rounded-full text-xs transition-all duration-200 ${activo
                       ? 'bg-[#691C32] text-white font-bold shadow-[0_2px_8px_rgba(105,28,50,0.35)]'
                       : 'text-slate-600 hover:text-slate-900 font-semibold hover:bg-white/60'
-                  }`}
+                    }`}
                 >
                   {item.icon}
                   <span>{item.label}</span>
@@ -135,17 +136,15 @@ export const Navbar: React.FC<NavbarProps> = ({
           <div className="flex items-center space-x-2.5">
             {/* Badge Realtime Premium */}
             <div
-              className={`flex items-center space-x-1.5 px-3 py-1 rounded-full text-[11px] font-bold border transition-colors ${
-                realtimeActivo
+              className={`flex items-center space-x-1.5 px-3 py-1 rounded-full text-[11px] font-bold border transition-colors ${realtimeActivo
                   ? 'bg-emerald-500/10 text-emerald-800 border-emerald-500/30'
                   : 'bg-amber-500/10 text-amber-800 border-amber-500/30'
-              }`}
+                }`}
               title={realtimeActivo ? 'Conectado a WebSockets de Supabase en vivo' : 'Modo estándar'}
             >
               <span
-                className={`w-2 h-2 rounded-full ${
-                  realtimeActivo ? 'bg-emerald-500 realtime-live-dot' : 'bg-amber-500'
-                }`}
+                className={`w-2 h-2 rounded-full ${realtimeActivo ? 'bg-emerald-500 realtime-live-dot' : 'bg-amber-500'
+                  }`}
               />
               <span className="hidden sm:inline">
                 {realtimeActivo ? 'En Vivo' : 'Offline'}
@@ -207,11 +206,10 @@ export const Navbar: React.FC<NavbarProps> = ({
               <button
                 key={item.id}
                 onClick={() => onCambiarVista(item.id)}
-                className={`flex items-center space-x-1.5 px-3 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all ${
-                  activo
+                className={`flex items-center space-x-1.5 px-3 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all ${activo
                     ? 'bg-[#691C32] text-white shadow-sm'
                     : 'text-slate-600 bg-slate-100 hover:bg-slate-200'
-                }`}
+                  }`}
               >
                 {item.icon}
                 <span>{item.label}</span>

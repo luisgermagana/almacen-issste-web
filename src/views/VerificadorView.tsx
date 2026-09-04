@@ -59,7 +59,7 @@ export const VerificadorView: React.FC<VerificadorViewProps> = ({ onVerFotos }) 
     : env?.fotos_camion || [];
 
   return (
-    <div className="max-w-4xl mx-auto space-y-6 animate-fadeIn">
+    <div className="w-full max-w-5xl mx-auto space-y-6 animate-fadeIn">
       {/* Header */}
       <div className="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-sm text-center">
         <div className="w-12 h-12 rounded-2xl bg-[#FDF2F4] text-[#691C32] flex items-center justify-center mx-auto mb-3 shadow-inner">

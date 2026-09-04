@@ -22,29 +22,29 @@ interface LoginViewProps {
 const ROLES_DISPONIBLES = [
   {
     id: 'Jefe de Almacén Central',
-    titulo: 'Jefatura de Almacén',
-    descripcion: 'Control integral, autorizaciones y reportes ejecutivos',
+    titulo: 'Jefatura de Almacén Central',
+    descripcion: 'Control integral directivo, autorizaciones y reportes ejecutivos',
     icono: Building2,
     badge: 'Administrador',
   },
   {
     id: 'Auditor OIC',
-    titulo: 'Auditoría & Control',
-    descripcion: 'Fiscalización, consulta de expedientes y trazabilidad',
+    titulo: 'Auditoría & Control Interno (OIC)',
+    descripcion: 'Fiscalización, consulta de expedientes digitales y trazabilidad',
     icono: ShieldCheck,
     badge: 'Órgano de Control',
   },
   {
     id: 'Supervisor de Embarques',
-    titulo: 'Supervisor Logístico',
-    descripcion: 'Control de salidas, camiones y destinos foráneos',
+    titulo: 'Supervisor Logístico y Distribución',
+    descripcion: 'Control de salidas, camiones, choferes y destinos foráneos',
     icono: Briefcase,
     badge: 'Operativo',
   },
   {
     id: 'Operador de Racks',
-    titulo: 'Operador de Racks',
-    descripcion: 'Acomodo en estanterías y lectura de marbetes QR',
+    titulo: 'Operador de Racks y Piso',
+    descripcion: 'Acomodo en estanterías, inventario físico y lectura de marbetes QR',
     icono: BadgeCheck,
     badge: 'Piso de Almacén',
   },
@@ -59,11 +59,10 @@ const ALMACENES_DISPONIBLES = [
 ];
 
 export const LoginView: React.FC<LoginViewProps> = ({ onLogin }) => {
-  const [nombre, setNombre] = useState('Ing. Luis Gerardo Magaña');
-  const [numEmpleado, setNumEmpleado] = useState('ISSSTE-2026-8492');
+  const [nombre, setNombre] = useState('');
   const [almacen, setAlmacen] = useState(ALMACENES_DISPONIBLES[0]);
   const [rolSeleccionado, setRolSeleccionado] = useState(ROLES_DISPONIBLES[0].id);
-  const [password, setPassword] = useState('••••••••');
+  const [password, setPassword] = useState('');
   const [mostrarPassword, setMostrarPassword] = useState(false);
   const [cargando, setCargando] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -74,10 +73,6 @@ export const LoginView: React.FC<LoginViewProps> = ({ onLogin }) => {
       setError('Por favor ingresa tu nombre completo.');
       return;
     }
-    if (!numEmpleado.trim()) {
-      setError('Por favor ingresa tu número de empleado.');
-      return;
-    }
 
     setError(null);
     setCargando(true);
@@ -86,7 +81,7 @@ export const LoginView: React.FC<LoginViewProps> = ({ onLogin }) => {
       const sesion: UsuarioSesion = {
         id: 'usr_' + Date.now(),
         nombre: nombre.trim(),
-        numEmpleado: numEmpleado.trim().toUpperCase(),
+        numEmpleado: 'ISSSTE-' + Math.floor(1000 + Math.random() * 9000),
         rol: rolSeleccionado,
         almacen,
         horaAcceso: new Date().toLocaleTimeString('es-MX', {
@@ -96,13 +91,12 @@ export const LoginView: React.FC<LoginViewProps> = ({ onLogin }) => {
       };
       setCargando(false);
       onLogin(sesion);
-    }, 450);
+    }, 350);
   };
 
-  const handleAccesoDemo = (rolId: string, nombreDemo: string, numDemo: string) => {
+  const handleAccesoDemo = (rolId: string, nombreDemo: string) => {
     setRolSeleccionado(rolId);
     setNombre(nombreDemo);
-    setNumEmpleado(numDemo);
     setPassword('issste2026');
 
     setCargando(true);
@@ -110,7 +104,7 @@ export const LoginView: React.FC<LoginViewProps> = ({ onLogin }) => {
       const sesion: UsuarioSesion = {
         id: 'usr_demo_' + Date.now(),
         nombre: nombreDemo,
-        numEmpleado: numDemo,
+        numEmpleado: 'ISSSTE-' + Math.floor(1000 + Math.random() * 9000),
         rol: rolId,
         almacen,
         horaAcceso: new Date().toLocaleTimeString('es-MX', {
@@ -120,7 +114,7 @@ export const LoginView: React.FC<LoginViewProps> = ({ onLogin }) => {
       };
       setCargando(false);
       onLogin(sesion);
-    }, 400);
+    }, 300);
   };
 
   return (
@@ -188,12 +182,12 @@ export const LoginView: React.FC<LoginViewProps> = ({ onLogin }) => {
 
             {/* Cuerpo del Formulario */}
             <div className="p-6 sm:p-8 space-y-6">
-              {/* Selector Visual de Rol */}
+              {/* Selector Visual de Rol EN FORMA DE LISTA */}
               <div>
                 <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2.5">
                   Selecciona tu Perfil / Función Institucional
                 </label>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                <div className="flex flex-col space-y-2">
                   {ROLES_DISPONIBLES.map((rol) => {
                     const seleccionado = rolSeleccionado === rol.id;
                     const Icono = rol.icono;
@@ -202,34 +196,48 @@ export const LoginView: React.FC<LoginViewProps> = ({ onLogin }) => {
                         key={rol.id}
                         type="button"
                         onClick={() => setRolSeleccionado(rol.id)}
-                        className={`text-left p-3 rounded-2xl border transition-all duration-150 relative ${
+                        className={`w-full text-left p-3.5 rounded-2xl border transition-all duration-150 flex items-center justify-between group ${
                           seleccionado
                             ? 'bg-[#FDF2F4] border-[#691C32] shadow-sm ring-1 ring-[#691C32]'
-                            : 'bg-slate-50/70 hover:bg-slate-100 border-slate-200 text-slate-700'
+                            : 'bg-slate-50/70 hover:bg-slate-100/90 border-slate-200 text-slate-700'
                         }`}
                       >
-                        <div className="flex items-start justify-between">
-                          <div className="flex items-center space-x-2.5">
-                            <div
-                              className={`p-1.5 rounded-xl ${
-                                seleccionado
-                                  ? 'bg-[#691C32] text-white'
-                                  : 'bg-slate-200 text-slate-600'
-                              }`}
-                            >
-                              <Icono className="w-4 h-4" />
-                            </div>
-                            <div>
-                              <div className="text-xs font-bold text-slate-900 font-['Montserrat']">
+                        <div className="flex items-center space-x-3">
+                          <div
+                            className={`p-2 rounded-xl transition-colors shrink-0 ${
+                              seleccionado
+                                ? 'bg-[#691C32] text-white shadow-sm'
+                                : 'bg-slate-200 text-slate-600 group-hover:bg-slate-300'
+                            }`}
+                          >
+                            <Icono className="w-4 h-4" />
+                          </div>
+                          <div>
+                            <div className="flex items-center space-x-2">
+                              <span className="text-xs font-bold text-slate-900 font-['Montserrat']">
                                 {rol.titulo}
-                              </div>
-                              <div className="text-[10px] text-slate-500 line-clamp-1">
-                                {rol.descripcion}
-                              </div>
+                              </span>
+                              <span
+                                className={`text-[9px] px-2 py-0.5 rounded-full font-bold uppercase tracking-wider ${
+                                  seleccionado
+                                    ? 'bg-[#691C32] text-white'
+                                    : 'bg-slate-200 text-slate-600'
+                                }`}
+                              >
+                                {rol.badge}
+                              </span>
+                            </div>
+                            <div className="text-[11px] text-slate-500 mt-0.5">
+                              {rol.descripcion}
                             </div>
                           </div>
-                          {seleccionado && (
-                            <CheckCircle2 className="w-4 h-4 text-[#691C32] flex-shrink-0 ml-1" />
+                        </div>
+
+                        <div className="shrink-0 ml-3">
+                          {seleccionado ? (
+                            <CheckCircle2 className="w-5 h-5 text-[#691C32]" />
+                          ) : (
+                            <div className="w-5 h-5 rounded-full border-2 border-slate-300 group-hover:border-slate-400" />
                           )}
                         </div>
                       </button>
@@ -248,38 +256,20 @@ export const LoginView: React.FC<LoginViewProps> = ({ onLogin }) => {
 
               {/* Formulario de Acceso */}
               <form onSubmit={handleSubmit} className="space-y-4">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  {/* Nombre Completo */}
-                  <div>
-                    <label className="block text-xs font-bold text-slate-700 mb-1.5 flex items-center space-x-1.5">
-                      <User className="w-3.5 h-3.5 text-[#691C32]" />
-                      <span>Nombre del Servidor Público</span>
-                    </label>
-                    <input
-                      type="text"
-                      required
-                      value={nombre}
-                      onChange={(e) => setNombre(e.target.value)}
-                      placeholder="Ej. Ing. Luis Gerardo Magaña"
-                      className="w-full px-3.5 py-2.5 text-xs bg-slate-50 border border-slate-200 rounded-xl font-semibold text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#691C32] focus:bg-white transition-all placeholder:text-slate-400"
-                    />
-                  </div>
-
-                  {/* Número de Empleado */}
-                  <div>
-                    <label className="block text-xs font-bold text-slate-700 mb-1.5 flex items-center space-x-1.5">
-                      <BadgeCheck className="w-3.5 h-3.5 text-[#691C32]" />
-                      <span>No. de Empleado / Clave ISSSTE</span>
-                    </label>
-                    <input
-                      type="text"
-                      required
-                      value={numEmpleado}
-                      onChange={(e) => setNumEmpleado(e.target.value)}
-                      placeholder="Ej. ISSSTE-94821"
-                      className="w-full px-3.5 py-2.5 text-xs font-mono bg-slate-50 border border-slate-200 rounded-xl font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#691C32] focus:bg-white transition-all placeholder:text-slate-400"
-                    />
-                  </div>
+                {/* Nombre Completo */}
+                <div>
+                  <label className="block text-xs font-bold text-slate-700 mb-1.5 flex items-center space-x-1.5">
+                    <User className="w-3.5 h-3.5 text-[#691C32]" />
+                    <span>Nombre del Servidor Público</span>
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    value={nombre}
+                    onChange={(e) => setNombre(e.target.value)}
+                    placeholder="Ingresa tu nombre completo"
+                    className="w-full px-3.5 py-2.5 text-xs bg-slate-50 border border-slate-200 rounded-xl font-semibold text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#691C32] focus:bg-white transition-all placeholder:text-slate-400"
+                  />
                 </div>
 
                 {/* Sede / Almacén */}
@@ -364,8 +354,7 @@ export const LoginView: React.FC<LoginViewProps> = ({ onLogin }) => {
                   onClick={() =>
                     handleAccesoDemo(
                       'Jefe de Almacén Central',
-                      'Ing. Luis Gerardo Magaña',
-                      'ISSSTE-2026-8492'
+                      'Ing. Luis Gerardo Magaña'
                     )
                   }
                   className="px-3.5 py-2.5 bg-slate-50 hover:bg-[#FDF2F4] text-slate-800 hover:text-[#691C32] border border-slate-200 hover:border-[#691C32]/40 rounded-xl text-xs font-bold transition-all flex items-center justify-between group"
@@ -385,8 +374,7 @@ export const LoginView: React.FC<LoginViewProps> = ({ onLogin }) => {
                   onClick={() =>
                     handleAccesoDemo(
                       'Auditor OIC',
-                      'Lic. Patricia Morales R.',
-                      'OIC-ISSSTE-5521'
+                      'Lic. Patricia Morales R.'
                     )
                   }
                   className="px-3.5 py-2.5 bg-slate-50 hover:bg-[#FDF2F4] text-slate-800 hover:text-[#691C32] border border-slate-200 hover:border-[#691C32]/40 rounded-xl text-xs font-bold transition-all flex items-center justify-between group"
