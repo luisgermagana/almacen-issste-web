@@ -92,7 +92,13 @@ export interface RackEstanteria {
   pasillo: string;
   niveles: number;
   posicionesPorNivel: number;
-  descripcion?: string;
-}
-
 export type VistaWeb = 'dashboard' | 'inventario' | 'racks' | 'auditoria' | 'verificador';
+
+export interface UsuarioSesion {
+  id: string;
+  nombre: string;
+  numEmpleado: string;
+  rol: string;
+  almacen: string;
+  horaAcceso: string;
+}

@@ -1,5 +1,5 @@
 import React from 'react';
-import type { VistaWeb } from '../types';
+import type { VistaWeb, UsuarioSesion } from '../types';
 import {
   LayoutDashboard,
   Boxes,
@@ -8,6 +8,8 @@ import {
   Search,
   RefreshCw,
   Building2,
+  LogOut,
+  User,
 } from 'lucide-react';
 
 interface NavbarProps {
@@ -17,6 +19,8 @@ interface NavbarProps {
   cargando: boolean;
   onRefrescar: () => void;
   ultimaActualizacion: Date | null;
+  usuario?: UsuarioSesion | null;
+  onLogout?: () => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
@@ -25,6 +29,8 @@ export const Navbar: React.FC<NavbarProps> = ({
   realtimeActivo,
   cargando,
   onRefrescar,
+  usuario,
+  onLogout,
 }) => {
   const navItems: { id: VistaWeb; label: string; icon: React.ReactNode }[] = [
     {
@@ -155,6 +161,41 @@ export const Navbar: React.FC<NavbarProps> = ({
             >
               <RefreshCw className={`w-3.5 h-3.5 ${cargando ? 'animate-spin text-[#691C32]' : ''}`} />
             </button>
+
+            {/* Perfil de Usuario y Cerrar Sesión */}
+            {usuario && (
+              <div className="flex items-center space-x-2 pl-2 border-l border-slate-200">
+                <div className="hidden md:flex items-center space-x-2 bg-slate-50 px-2.5 py-1 rounded-xl border border-slate-200/80">
+                  <div className="w-6 h-6 rounded-lg bg-[#691C32] text-[#DFC79B] flex items-center justify-center font-black text-[10px]">
+                    {usuario.nombre
+                      .split(' ')
+                      .map((n) => n[0])
+                      .slice(0, 2)
+                      .join('')
+                      .toUpperCase()}
+                  </div>
+                  <div className="text-left">
+                    <div className="text-xs font-bold text-slate-800 leading-tight truncate max-w-[120px]">
+                      {usuario.nombre}
+                    </div>
+                    <div className="text-[9px] text-[#691C32] font-semibold leading-none truncate max-w-[120px]">
+                      {usuario.rol}
+                    </div>
+                  </div>
+                </div>
+
+                {onLogout && (
+                  <button
+                    onClick={onLogout}
+                    className="flex items-center space-x-1 px-2.5 py-1.5 text-xs text-rose-700 bg-rose-50 hover:bg-rose-100/80 border border-rose-200 rounded-xl font-bold transition-all"
+                    title="Cerrar sesión segura"
+                  >
+                    <LogOut className="w-3.5 h-3.5" />
+                    <span className="hidden sm:inline">Salir</span>
+                  </button>
+                )}
+              </div>
+            )}
           </div>
         </div>
 

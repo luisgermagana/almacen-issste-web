@@ -7,6 +7,7 @@ import {
   ItemInventario,
   MovimientoUnificado,
   CeldaRack,
+  UsuarioSesion,
 } from './types';
 import {
   fetchProductos,
@@ -26,9 +27,38 @@ import { InventarioView } from './views/InventarioView';
 import { RacksView } from './views/RacksView';
 import { AuditoriaView } from './views/AuditoriaView';
 import { VerificadorView } from './views/VerificadorView';
+import { LoginView } from './views/LoginView';
 import { Bell, CheckCircle, Building2, Shield } from 'lucide-react';
 
 export function App() {
+  // Estado de Sesión Institucional
+  const [usuario, setUsuario] = useState<UsuarioSesion | null>(() => {
+    try {
+      const sesionGuardada = localStorage.getItem('almacen_issste_session');
+      return sesionGuardada ? JSON.parse(sesionGuardada) : null;
+    } catch {
+      return null;
+    }
+  });
+
+  const handleLogin = (nuevoUsuario: UsuarioSesion) => {
+    setUsuario(nuevoUsuario);
+    try {
+      localStorage.setItem('almacen_issste_session', JSON.stringify(nuevoUsuario));
+    } catch (e) {
+      console.error('Error guardando sesion:', e);
+    }
+  };
+
+  const handleLogout = () => {
+    setUsuario(null);
+    try {
+      localStorage.removeItem('almacen_issste_session');
+    } catch (e) {
+      console.error('Error cerrando sesion:', e);
+    }
+  };
+
   const [vistaActual, setVistaActual] = useState<VistaWeb>('dashboard');
   const [productos, setProductos] = useState<Producto[]>([]);
   const [recepciones, setRecepciones] = useState<RegistroRecepcion[]>([]);
@@ -161,6 +191,11 @@ export function App() {
     setModalRackEtiqueta({ abierto: true, celda });
   };
 
+  // Si no hay sesión activa, mostrar pantalla de inicio de sesión institucional
+  if (!usuario) {
+    return <LoginView onLogin={handleLogin} />;
+  }
+
   return (
     <div className="min-h-screen flex flex-col bg-slate-50 text-slate-900 font-['Inter']">
       {/* Barra de Navegación Institucional */}
@@ -171,6 +206,8 @@ export function App() {
         cargando={cargando}
         onRefrescar={() => cargarDatos()}
         ultimaActualizacion={ultimaActualizacion}
+        usuario={usuario}
+        onLogout={handleLogout}
       />
 
       {/* Toast Flotante de Notificación en Vivo (Realtime) */}
