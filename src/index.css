@@ -1,0 +1,135 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    /* Paleta Institucional ISSSTE Oficial */
+    --issste-guinda: #691C32;
+    --issste-guinda-dark: #4C1021;
+    --issste-guinda-light: #8B1E3F;
+    --issste-guinda-subtle: #FDF2F4;
+    --issste-guinda-border: #F7D6DC;
+
+    --issste-dorado: #BC955C;
+    --issste-dorado-light: #DFC79B;
+    --issste-dorado-subtle: #FDF9F3;
+    --issste-dorado-dark: #8F6B38;
+
+    --issste-verde: #10312B;
+    --issste-verde-emerald: #0D7E46;
+    --issste-verde-subtle: #EDF9F2;
+
+    --issste-gris-plata: #98989A;
+    --issste-gris-claro: #F4F6F8;
+
+    /* Tipografías */
+    --font-heading: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+
+  body {
+    font-family: var(--font-body);
+    background-color: #F8FAFC;
+    color: #0F172A;
+    margin: 0;
+    padding: 0;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+  }
+}
+
+/* Clases auxiliares para la marca institucional */
+.bg-issste-guinda {
+  background-color: #691C32;
+}
+
+.text-issste-guinda {
+  color: #691C32;
+}
+
+.border-issste-guinda {
+  border-color: #691C32;
+}
+
+.bg-issste-dorado {
+  background-color: #BC955C;
+}
+
+.text-issste-dorado {
+  color: #BC955C;
+}
+
+.border-issste-dorado {
+  border-color: #BC955C;
+}
+
+.bg-issste-verde {
+  background-color: #10312B;
+}
+
+/* Glassmorphism & Cards */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(226, 232, 240, 0.8);
+}
+
+.glass-panel-dark {
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Efectos de pulso en vivo para Realtime */
+@keyframes pulse-dot {
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+  70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+}
+
+.realtime-live-dot {
+  animation: pulse-dot 2s infinite cubic-bezier(0.4, 0, 0.6, 1);
+}
+
+/* Estilos de Impresión Oficiales para Marbetes / Racks */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  .printable-etiqueta-rack, .printable-etiqueta-rack * {
+    visibility: visible;
+  }
+  .printable-etiqueta-rack {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    margin: 0;
+    padding: 20px;
+  }
+  .no-print {
+    display: none !important;
+  }
+}
+
+/* Scrollbars estilizados */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #F1F5F9;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #CBD5E1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94A3B8;
+}

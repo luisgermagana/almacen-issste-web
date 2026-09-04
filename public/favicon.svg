@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="guindaGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#8B1E3F" />
+      <stop offset="100%" stop-color="#551225" />
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E5C378" />
+      <stop offset="50%" stop-color="#BC955C" />
+      <stop offset="100%" stop-color="#8F6B38" />
+    </linearGradient>
+    <filter id="dropShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#000000" flood-opacity="0.35" />
+    </filter>
+  </defs>
+
+  <!-- Background rounded squircle -->
+  <rect width="512" height="512" rx="110" fill="url(#guindaGrad)" />
+
+  <!-- Outer gold border ring -->
+  <rect x="24" y="24" width="464" height="464" rx="90" fill="none" stroke="url(#goldGrad)" stroke-width="6" opacity="0.85" />
+
+  <!-- Inner shield / emblem container -->
+  <g filter="url(#dropShadow)" transform="translate(0, -10)">
+    <!-- Stylized warehouse / box / crest -->
+    <path d="M256 100 L380 170 L380 320 L256 390 L132 320 L132 170 Z" fill="#ffffff" fill-opacity="0.08" stroke="url(#goldGrad)" stroke-width="8" stroke-linejoin="round" />
+    
+    <!-- Top roof / pediment -->
+    <polygon points="256,125 355,182 157,182" fill="url(#goldGrad)" />
+    
+    <!-- Institutional columns -->
+    <rect x="180" y="195" width="22" height="95" rx="4" fill="#ffffff" />
+    <rect x="245" y="195" width="22" height="95" rx="4" fill="#ffffff" />
+    <rect x="310" y="195" width="22" height="95" rx="4" fill="#ffffff" />
+    
+    <!-- Base step -->
+    <rect x="160" y="295" width="192" height="16" rx="4" fill="url(#goldGrad)" />
+  </g>
+
+  <!-- Typography: ISSSTE -->
+  <text x="256" y="380" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="44" font-weight="900" letter-spacing="6" fill="#FFFFFF">ISSSTE</text>
+  
+  <!-- Banner ALMACÉN -->
+  <rect x="136" y="405" width="240" height="40" rx="20" fill="url(#goldGrad)" />
+  <text x="256" y="432" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="20" font-weight="800" letter-spacing="4" fill="#3D0C1A">ALMACÉN</text>
+</svg>
