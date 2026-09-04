@@ -21,6 +21,11 @@
     --issste-gris-plata: #98989A;
     --issste-gris-claro: #F4F6F8;
 
+    /* Curvas de aceleración de Emil Kowalski (Design Engineering) */
+    --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+    --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+    --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+
     /* Tipografías */
     --font-heading: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -32,6 +37,12 @@
     color: #0F172A;
     margin: 0;
     padding: 0;
+  }
+
+  /* Retroalimentación táctil activa de Emil Kowalski */
+  button:active, a:active, [role="button"]:active {
+    transform: scale(0.98);
+    transition: transform 120ms var(--ease-out);
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -92,6 +103,22 @@
 
 .realtime-live-dot {
   animation: pulse-dot 2s infinite cubic-bezier(0.4, 0, 0.6, 1);
+}
+
+/* Animación de entrada natural de modales (Regla de Emil: nunca desde scale(0)) */
+@keyframes modalEnter {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.animate-modal-enter {
+  animation: modalEnter 180ms var(--ease-out) forwards;
 }
 
 /* Estilos de Impresión Oficiales para Marbetes / Racks */
